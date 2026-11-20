@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace StringTasks
 {
@@ -6,16 +7,20 @@ namespace StringTasks
     {
         static void Main(string[] args)
         {
-            string originalText = "Hello, World! 2026 - C# Caesar Cipher (Test: xyz / XYZ).";
-            int shift = 3;
+            string csvLine = "\"Smith, John\",42,\"New York, NY\"";
 
-            string encrypted = CaesarCipher.Encrypt(originalText, shift);
-            string decrypted = CaesarCipher.Decrypt(encrypted, shift);
+            Console.WriteLine("=== Задание 4: Парсер CSV с кавычками ===");
+            Console.WriteLine($"Исходная строка: {csvLine}\n");
 
-            Console.WriteLine("=== Задание 3: Шифр Цезаря ===");
-            Console.WriteLine($"Исходный текст:      {originalText}");
-            Console.WriteLine($"Зашифрованный (+{shift}):  {encrypted}");
-            Console.WriteLine($"Расшифрованный (-{shift}): {decrypted}");
+            List<string> fields = CsvParser.ParseLine(csvLine);
+            Console.WriteLine($"Распознано полей: {fields.Count}");
+            for (int i = 0; i < fields.Count; i++)
+            {
+                Console.WriteLine($"  Поле [{i + 1}]: {fields[i]}");
+            }
+
+            string rebuilt = CsvParser.BuildLine(fields);
+            Console.WriteLine($"\nОбратная сборка: {rebuilt}");
 
             Console.WriteLine("\nНажмите любую клавишу для выхода...");
             Console.ReadKey();
