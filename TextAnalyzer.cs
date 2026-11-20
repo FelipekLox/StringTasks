@@ -18,7 +18,7 @@ namespace StringTasks
             int charsWithoutSpaces = text.Count(c => !char.IsWhiteSpace(c));
 
             // 2. Количество слов (разделители — пробелы, запятые, точки и переносы строк)
-            char[] wordDelimiters = { ' ', ',', '.', '\n', '\r', '\t' };
+            char[] wordDelimiters = { ' ', ',', '.', '!', '?', '\n', '\r', '\t' };
             string[] words = text.Split(wordDelimiters, StringSplitOptions.RemoveEmptyEntries);
 
             // 3. Количество предложений (разделители — . ! ?)
@@ -40,7 +40,6 @@ namespace StringTasks
                 .ThenBy(x => x.Word)
                 .Take(5);
 
-            // Вывод статистики
             Console.WriteLine("=== Задание 1: Анализатор текста ===");
             Console.WriteLine($"Символов (с пробелами): {totalChars}");
             Console.WriteLine($"Символов (без пробелов): {charsWithoutSpaces}");
